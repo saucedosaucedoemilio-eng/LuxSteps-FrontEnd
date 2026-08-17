@@ -37,11 +37,13 @@ LuxSteps-FrontEnd/
 
 ## Variables de entorno
 
-Copia `.env.example` a `.env.local` y ajusta la URL de la API si es necesario:
+Vite carga el archivo según el modo, así que no hay que tocar nada al desplegar:
 
-```
-VITE_API_URL=http://localhost:5000/api
-```
+- `.env.development` → usado por `npm run dev` → `http://localhost:5000/api`
+- `.env.production` → usado por `npm run build` (y por Vercel al hacer build) → `https://luxsteps-api.onrender.com/api`
+- `.env.local` (ignorado por git) → override personal opcional, tiene prioridad solo en modo `development`
+
+Para desarrollo local puro no necesitas crear nada: `.env.development` ya apunta a `localhost:5000`. `.env.local` existe además por si quieres tu propio override sin tocar el repo.
 
 ## Scripts
 
@@ -65,6 +67,11 @@ npm run lint        # Linter (oxlint)
 - `src/context/CartContext.jsx` es un carrito 100% de cliente (persistido en `localStorage`), disponible tanto para usuarios logueados como anónimos — no depende de un endpoint de carrito en la API (no existe uno).
 - "Agregar al carrito" está disponible desde el listado de productos y desde el detalle (con selección de talla/cantidad si el producto las tiene).
 - `/carrito` permite editar cantidades, eliminar ítems y vaciar el carrito. No hay checkout real porque la API no tiene endpoint de órdenes.
+
+## Despliegue
+
+- **Frontend**: [https://lux-steps-front-end.vercel.app](https://lux-steps-front-end.vercel.app) (Vercel). Al hacer build usa automáticamente `.env.production`, no requiere configurar variables de entorno en el dashboard de Vercel a menos que quieras sobreescribirlas ahí.
+- **Backend**: `https://luxsteps-api.onrender.com` (Render). El backend restringe CORS a los orígenes listados en la variable de entorno `ALLOWED_ORIGINS` (ver `LuxSteps-API/.env.example`); debe incluir la URL de Vercel para que el frontend pueda llamarlo.
 
 ## Pendientes conocidos
 

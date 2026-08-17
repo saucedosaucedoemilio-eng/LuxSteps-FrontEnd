@@ -4,6 +4,7 @@ import ProductForm from "../../../../components/ProductForm";
 import AdminPageHeader from "../../../../components/admin/AdminPageHeader";
 import { ArrowLeftIcon } from "../../../../components/admin/icons";
 import { createProduct } from "../../../../services/productService";
+import { btnOutline, cardClass } from "../../../../styles/classNames";
 
 function NuevoProducto() {
   const navigate = useNavigate();
@@ -35,15 +36,15 @@ function NuevoProducto() {
         title="Nuevo producto"
         subtitle="Completa la información del producto"
         actions={
-          <button type="button" className="btn btn--outline" onClick={() => navigate("/admin/productos")}>
+          <button type="button" className={btnOutline} onClick={() => navigate("/admin/productos")}>
             <ArrowLeftIcon /> Volver a productos
           </button>
         }
       />
 
-      {error && <p className="form-error">{error}</p>}
+      {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
-      <div className="admin-card">
+      <div className={cardClass}>
         <ProductForm onSubmit={handleCreate} />
       </div>
     </>

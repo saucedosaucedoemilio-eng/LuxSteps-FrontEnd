@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { btnPrimary, inputClass, labelClass } from "../styles/classNames";
 
 function LoginForm({ onSubmit }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -13,28 +14,40 @@ function LoginForm({ onSubmit }) {
   };
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
-      <label htmlFor="email">Correo electrónico</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
+    <form className="flex w-full max-w-sm flex-col gap-4" onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="email" className={labelClass}>
+          Correo electrónico
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          className={inputClass}
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="password">Contraseña</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="password" className={labelClass}>
+          Contraseña
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          className={inputClass}
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <button type="submit">Iniciar sesión</button>
+      <button type="submit" className={btnPrimary}>
+        Iniciar sesión
+      </button>
     </form>
   );
 }

@@ -13,11 +13,13 @@ function Productos() {
   }, []);
 
   return (
-    <section className="products-page">
-      <h1>Productos</h1>
-      {error && <p className="form-error">{error}</p>}
-      {products.length === 0 && !error && <p>No hay productos disponibles.</p>}
-      <div className="products-grid">
+    <section className="flex flex-col gap-5">
+      <h1 className="text-2xl font-bold text-gray-900">Productos</h1>
+
+      {error && <p className="text-sm text-red-600">{error}</p>}
+      {products.length === 0 && !error && <p className="text-sm text-gray-500">No hay productos disponibles.</p>}
+
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

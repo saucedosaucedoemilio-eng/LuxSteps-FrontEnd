@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { btnPrimary, inputClass, labelClass } from "../styles/classNames";
 
 function RegisterForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -17,38 +18,55 @@ function RegisterForm({ onSubmit }) {
   };
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
-      <label htmlFor="name">Nombre</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
+    <form className="flex w-full max-w-sm flex-col gap-4" onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="name" className={labelClass}>
+          Nombre
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          className={inputClass}
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="email">Correo electrónico</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="email" className={labelClass}>
+          Correo electrónico
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          className={inputClass}
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="password">Contraseña</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="password" className={labelClass}>
+          Contraseña
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          className={inputClass}
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <button type="submit">Registrarse</button>
+      <button type="submit" className={btnPrimary}>
+        Registrarse
+      </button>
     </form>
   );
 }

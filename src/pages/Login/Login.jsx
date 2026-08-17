@@ -22,9 +22,9 @@ function Login() {
   };
 
   return (
-    <section className="auth-page">
-      <h1>Iniciar sesión</h1>
-      {error && <p className="form-error">{error}</p>}
+    <section className="flex flex-col gap-5">
+      <h1 className="text-2xl font-bold text-gray-900">Iniciar sesión</h1>
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <LoginForm onSubmit={handleLogin} />
     </section>
   );

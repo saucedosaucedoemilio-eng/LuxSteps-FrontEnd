@@ -1,6 +1,6 @@
 # LuxSteps-FrontEnd
 
-Frontend de LuxSteps construido con React + Vite, consumiendo la API en `LuxSteps-API`.
+Frontend de LuxSteps construido con React + Vite, consumiendo la API en `LuxSteps-API`. Todo el maquetado usa **Tailwind CSS v4** (utility classes en el JSX) — no hay archivos `.css` con reglas propias, solo `src/index.css` con las tres líneas de setup de Tailwind.
 
 ## Estructura del proyecto
 
@@ -11,6 +11,8 @@ LuxSteps-FrontEnd/
 │   └── images/
 ├── src/
 │   ├── components/      # Componentes reutilizables (Navbar, Footer, ProductCard, ProductForm, LoginForm, RegisterForm)
+│   │   └── admin/        # Layout y piezas propias del panel admin (AdminLayout, AdminPageHeader, icons)
+│   ├── styles/           # classNames.js: strings de clases Tailwind reutilizadas (botones, inputs, cards)
 │   ├── services/        # Llamadas a la API (authService, productService)
 │   ├── pages/           # Vistas de la aplicación, organizadas por ruta
 │   │   ├── Login/
@@ -67,6 +69,12 @@ npm run lint        # Linter (oxlint)
 - `src/context/CartContext.jsx` es un carrito 100% de cliente (persistido en `localStorage`), disponible tanto para usuarios logueados como anónimos — no depende de un endpoint de carrito en la API (no existe uno).
 - "Agregar al carrito" está disponible desde el listado de productos y desde el detalle (con selección de talla/cantidad si el producto las tiene).
 - `/carrito` permite editar cantidades, eliminar ítems y vaciar el carrito. No hay checkout real porque la API no tiene endpoint de órdenes.
+
+## Estilos (Tailwind CSS)
+
+- Configurado vía `@tailwindcss/vite` en `vite.config.js` (Tailwind v4, sin `tailwind.config.js`: la configuración va en CSS con `@theme` dentro de `src/index.css`).
+- El color de marca (`bg-brand-600`, `text-brand-600`, etc.) está definido ahí mismo como `--color-brand-*`.
+- `src/styles/classNames.js` centraliza combinaciones de clases repetidas (botones, inputs, cards) para no duplicar strings largos en cada componente — sigue siendo Tailwind puro, no CSS.
 
 ## Despliegue
 

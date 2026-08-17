@@ -4,6 +4,7 @@ import ProductForm from "../../../../components/ProductForm";
 import AdminPageHeader from "../../../../components/admin/AdminPageHeader";
 import { ArrowLeftIcon, InfoIcon, TrashIcon } from "../../../../components/admin/icons";
 import { deleteProduct, getProductById, updateProduct } from "../../../../services/productService";
+import { btnDangerOutline, btnOutline, btnPrimary, cardClass } from "../../../../styles/classNames";
 
 const FORM_ID = "edit-product-form";
 
@@ -46,8 +47,8 @@ function EditarProducto() {
     }
   };
 
-  if (error && !product) return <p className="form-error">{error}</p>;
-  if (!product) return <p>Cargando...</p>;
+  if (error && !product) return <p className="text-sm text-red-600">{error}</p>;
+  if (!product) return <p className="text-sm text-gray-500">Cargando...</p>;
 
   return (
     <>
@@ -56,16 +57,16 @@ function EditarProducto() {
         title="Editar producto"
         subtitle="Actualiza la información de tu producto"
         actions={
-          <button type="button" className="btn btn--outline" onClick={() => navigate("/admin/productos")}>
+          <button type="button" className={btnOutline} onClick={() => navigate("/admin/productos")}>
             <ArrowLeftIcon /> Volver a productos
           </button>
         }
       />
 
-      {error && <p className="form-error">{error}</p>}
+      {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
-      <div className="admin-edit-product">
-        <div className="admin-card admin-edit-product__form">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[2fr_1fr]">
+        <div className={cardClass}>
           <ProductForm
             initialData={product}
             allowImages={false}
@@ -75,40 +76,45 @@ function EditarProducto() {
           />
         </div>
 
-        <div className="admin-card admin-edit-product__images">
-          <h2>Imágenes actuales</h2>
-          <p>Estas imágenes no son editables desde aquí.</p>
+        <div className={cardClass}>
+          <h2 className="mb-1 text-base font-semibold text-gray-900">Imágenes actuales</h2>
+          <p className="mb-4 text-sm text-gray-500">Estas imágenes no son editables desde aquí.</p>
 
           {product.images?.length > 0 ? (
-            <div className="admin-edit-product__images-grid">
+            <div className="grid grid-cols-2 gap-3">
               {product.images.map((src) => (
-                <img key={src} src={src} alt={product.name} />
+                <img
+                  key={src}
+                  src={src}
+                  alt={product.name}
+                  className="aspect-square w-full rounded-lg bg-gray-100 object-cover"
+                />
               ))}
             </div>
           ) : (
-            <p>Este producto no tiene imágenes.</p>
+            <p className="text-sm text-gray-500">Este producto no tiene imágenes.</p>
           )}
 
-          <div className="admin-edit-product__images-note">
-            <InfoIcon />
+          <div className="mt-4 flex gap-2 rounded-lg bg-brand-50 p-3 text-sm text-brand-600">
+            <InfoIcon className="mt-0.5 shrink-0" />
             <span>La API todavía no permite actualizar las imágenes de un producto ya creado.</span>
           </div>
         </div>
       </div>
 
-      <div className="admin-edit-product__actions">
+      <div className="mt-6 flex items-center justify-end gap-3 rounded-xl border border-gray-200 bg-white p-4">
         <button
           type="button"
-          className="btn btn--danger-outline"
+          className={`${btnDangerOutline} mr-auto`}
           onClick={handleDelete}
           disabled={deleting}
         >
           <TrashIcon /> Eliminar producto
         </button>
-        <button type="button" className="btn btn--outline" onClick={() => navigate("/admin/productos")}>
+        <button type="button" className={btnOutline} onClick={() => navigate("/admin/productos")}>
           Cancelar
         </button>
-        <button type="submit" form={FORM_ID} className="btn btn--primary">
+        <button type="submit" form={FORM_ID} className={btnPrimary}>
           Guardar cambios
         </button>
       </div>

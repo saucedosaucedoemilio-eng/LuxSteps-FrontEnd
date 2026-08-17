@@ -13,7 +13,6 @@ import AdminProductos from "./pages/Admin/Productos/AdminProductos";
 import NuevoProducto from "./pages/Admin/Productos/Nuevo/NuevoProducto";
 import EditarProducto from "./pages/Admin/Productos/Editar/EditarProducto";
 import AdminUsuarios from "./pages/Admin/Usuarios/AdminUsuarios";
-import "./App.css";
 
 function App() {
   return (

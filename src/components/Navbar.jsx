@@ -1,7 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
-import { btnGhost } from "../styles/classNames";
+
+const linkClass = ({ isActive }) =>
+  `text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors ${
+    isActive ? "text-cream-50" : "text-cream-200/70 hover:text-cream-50"
+  }`;
 
 function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -13,43 +17,69 @@ function Navbar() {
     navigate("/");
   };
 
-  const navLinkClass = "text-sm font-medium text-gray-600 hover:text-gray-900";
-
   return (
-    <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-      <Link to="/" className="flex items-center">
-        <img src="/logo.png" alt="LuxSteps" className="h-10" />
-      </Link>
+    <header className="sticky top-0 z-50 border-b border-ink-800 bg-ink-950/90 backdrop-blur">
+      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-4">
+        <nav className="hidden items-center gap-7 md:flex">
+          <NavLink to="/productos" className={linkClass}>
+            Colección
+          </NavLink>
+        </nav>
 
-      <nav className="flex items-center gap-5">
-        <Link to="/productos" className={navLinkClass}>
-          Productos
-        </Link>
-        <Link to="/carrito" className={navLinkClass}>
-          Carrito {totalItems > 0 && `(${totalItems})`}
+        <Link
+          to="/"
+          className="justify-self-center font-display text-2xl font-semibold uppercase tracking-[0.3em] text-cream-50"
+        >
+          LuxSteps
         </Link>
 
-        {isAuthenticated ? (
-          <>
-            <Link to="/admin" className={navLinkClass}>
-              Admin
-            </Link>
-            <span className="text-sm text-gray-500">Hola, {user?.name}</span>
-            <button type="button" onClick={handleLogout} className={btnGhost}>
-              Cerrar sesión
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className={navLinkClass}>
-              Iniciar sesión
-            </Link>
-            <Link to="/registro" className={navLinkClass}>
-              Registrarse
-            </Link>
-          </>
-        )}
-      </nav>
+        <nav className="flex items-center justify-end gap-5">
+          {isAuthenticated ? (
+            <>
+              <NavLink
+                to="/pedidos"
+                className={(s) => `hidden md:inline ${linkClass(s)}`}
+              >
+                Mis pedidos
+              </NavLink>
+              {user?.role === "admin" && (
+                <NavLink to="/admin" className={linkClass}>
+                  Admin
+                </NavLink>
+              )}
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="hidden text-[11px] font-semibold uppercase tracking-[0.2em] text-cream-200/70 hover:text-cream-50 md:inline"
+              >
+                Salir
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/login"
+                className={(s) => `hidden md:inline ${linkClass(s)}`}
+              >
+                Ingresar
+              </NavLink>
+              <NavLink
+                to="/registro"
+                className={(s) => `hidden md:inline ${linkClass(s)}`}
+              >
+                Registrarse
+              </NavLink>
+            </>
+          )}
+
+          <Link
+            to="/carrito"
+            className="rounded-full border border-cream-100/25 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-cream-50 transition-colors hover:bg-cream-50/10"
+          >
+            Carrito{totalItems > 0 && ` · ${totalItems}`}
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }

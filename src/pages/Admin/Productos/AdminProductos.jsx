@@ -42,47 +42,43 @@ function AdminProductos() {
         }
       />
 
-      {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mb-4 text-sm text-red-400">{error}</p>}
 
       <div className={`${cardClass} overflow-x-auto`}>
         {products.length === 0 && !error ? (
-          <p className="text-sm text-gray-500">No hay productos todavía.</p>
+          <p className="text-sm text-cream-200/55">No hay productos todavía.</p>
         ) : (
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr>
-                <th className="border-b border-gray-200 px-3 py-2.5 text-left font-semibold text-gray-500">
-                  Nombre
-                </th>
-                <th className="border-b border-gray-200 px-3 py-2.5 text-left font-semibold text-gray-500">
-                  Precio
-                </th>
-                <th className="border-b border-gray-200 px-3 py-2.5 text-left font-semibold text-gray-500">
-                  Stock
-                </th>
-                <th className="border-b border-gray-200 px-3 py-2.5 text-left font-semibold text-gray-500">
-                  Acciones
-                </th>
+                {["Nombre", "Precio", "Stock", "Acciones"].map((h) => (
+                  <th
+                    key={h}
+                    className="border-b border-ink-800 px-3 py-2.5 text-left text-[11px] font-semibold uppercase tracking-[0.16em] text-cream-200/45"
+                  >
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product._id}>
-                  <td className="border-b border-gray-100 px-3 py-3">{product.name}</td>
-                  <td className="border-b border-gray-100 px-3 py-3">${product.price}</td>
-                  <td className="border-b border-gray-100 px-3 py-3">{product.stock}</td>
-                  <td className="border-b border-gray-100 px-3 py-3">
+                <tr key={product._id} className="transition-colors hover:bg-cream-50/[0.03]">
+                  <td className="border-b border-ink-800/70 px-3 py-3 text-cream-100">{product.name}</td>
+                  <td className="border-b border-ink-800/70 px-3 py-3 text-cognac-400">${product.price}</td>
+                  <td className="border-b border-ink-800/70 px-3 py-3 text-cream-200/70">{product.stock}</td>
+                  <td className="border-b border-ink-800/70 px-3 py-3">
                     <div className="flex items-center gap-4">
                       <Link
                         to={`/admin/productos/editar/${product._id}`}
-                        className="text-brand-600 hover:underline"
+                        className="text-cognac-400 transition-colors hover:text-cognac-300"
                       >
                         Editar
                       </Link>
                       <button
                         type="button"
                         onClick={() => handleDelete(product._id)}
-                        className="text-red-600 hover:underline"
+                        className="text-red-400 transition-colors hover:text-red-300"
                       >
                         Eliminar
                       </button>

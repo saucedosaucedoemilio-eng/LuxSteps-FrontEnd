@@ -47,8 +47,8 @@ function EditarProducto() {
     }
   };
 
-  if (error && !product) return <p className="text-sm text-red-600">{error}</p>;
-  if (!product) return <p className="text-sm text-gray-500">Cargando...</p>;
+  if (error && !product) return <p className="text-sm text-red-400">{error}</p>;
+  if (!product) return <p className="text-sm text-cream-200/55">Cargando...</p>;
 
   return (
     <>
@@ -63,7 +63,7 @@ function EditarProducto() {
         }
       />
 
-      {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mb-4 text-sm text-red-400">{error}</p>}
 
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[2fr_1fr]">
         <div className={cardClass}>
@@ -77,8 +77,8 @@ function EditarProducto() {
         </div>
 
         <div className={cardClass}>
-          <h2 className="mb-1 text-base font-semibold text-gray-900">Imágenes actuales</h2>
-          <p className="mb-4 text-sm text-gray-500">Estas imágenes no son editables desde aquí.</p>
+          <h2 className="mb-1 font-display text-base font-semibold text-cream-50">Imágenes actuales</h2>
+          <p className="mb-4 text-sm text-cream-200/55">Estas imágenes no son editables desde aquí.</p>
 
           {product.images?.length > 0 ? (
             <div className="grid grid-cols-2 gap-3">
@@ -87,22 +87,22 @@ function EditarProducto() {
                   key={src}
                   src={src}
                   alt={product.name}
-                  className="aspect-square w-full rounded-lg bg-gray-100 object-cover"
+                  className="aspect-square w-full rounded-lg bg-ink-800 object-cover"
                 />
               ))}
             </div>
           ) : (
-            <p className="text-sm text-gray-500">Este producto no tiene imágenes.</p>
+            <p className="text-sm text-cream-200/55">Este producto no tiene imágenes.</p>
           )}
 
-          <div className="mt-4 flex gap-2 rounded-lg bg-brand-50 p-3 text-sm text-brand-600">
-            <InfoIcon className="mt-0.5 shrink-0" />
+          <div className="mt-4 flex gap-2 rounded-lg border border-cognac-500/30 bg-cognac-500/10 p-3 text-sm text-cream-200/80">
+            <InfoIcon className="mt-0.5 shrink-0 text-cognac-400" />
             <span>La API todavía no permite actualizar las imágenes de un producto ya creado.</span>
           </div>
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-end gap-3 rounded-xl border border-gray-200 bg-white p-4">
+      <div className="mt-6 flex items-center justify-end gap-3 rounded-xl border border-ink-800 bg-ink-900 p-4">
         <button
           type="button"
           className={`${btnDangerOutline} mr-auto`}

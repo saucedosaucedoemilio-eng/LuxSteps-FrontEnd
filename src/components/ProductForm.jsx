@@ -87,7 +87,7 @@ function ProductForm({
             Precio *
           </label>
           <div className="relative">
-            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-cream-200/50">
               $
             </span>
             <input
@@ -159,7 +159,7 @@ function ProductForm({
             multiple
             accept="image/*"
             onChange={handleFileChange}
-            className="text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-brand-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-brand-600 hover:file:bg-brand-100"
+            className="text-sm text-cream-200/60 file:mr-3 file:rounded-lg file:border-0 file:bg-cognac-500/15 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-cognac-300 hover:file:bg-cognac-500/25"
           />
         </div>
       )}

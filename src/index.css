@@ -1,13 +1,61 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #eeecfd;
-  --color-brand-100: #ded9fb;
-  --color-brand-500: #6c5fe6;
-  --color-brand-600: #5b4fe0;
-  --color-brand-700: #4c3fd6;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  /* Carbón / tinta */
+  --color-ink-950: #0a0908;
+  --color-ink-900: #12100e;
+  --color-ink-850: #1a1613;
+  --color-ink-800: #221d18;
+  --color-ink-700: #2f2820;
+  --color-ink-600: #43392e;
+
+  /* Café espresso (hero, madera) */
+  --color-espresso-950: #170f07;
+  --color-espresso-900: #23170a;
+  --color-espresso-800: #372410;
+  --color-espresso-700: #4d341b;
+  --color-espresso-600: #6a4a29;
+
+  /* Acento coñac / cuero */
+  --color-cognac-300: #d3a374;
+  --color-cognac-400: #c0824f;
+  --color-cognac-500: #a96b3d;
+  --color-cognac-600: #895530;
+
+  /* Crema / marfil */
+  --color-cream-50: #f7f2e9;
+  --color-cream-100: #ebe1d1;
+  --color-cream-200: #d6c4ac;
+  --color-cream-300: #b39a7d;
+
+  /* Alias de marca (compatibilidad con clases previas) */
+  --color-brand-50: #f7f2e9;
+  --color-brand-100: #ebe1d1;
+  --color-brand-500: #a96b3d;
+  --color-brand-600: #895530;
+  --color-brand-700: #6a4a29;
 }
 
-body {
-  @apply bg-gray-50 text-gray-900;
+@layer base {
+  body {
+    @apply bg-ink-950 font-sans text-cream-100 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-cognac-500 text-ink-950;
+  }
+}
+
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.28em] text-cognac-400;
 }

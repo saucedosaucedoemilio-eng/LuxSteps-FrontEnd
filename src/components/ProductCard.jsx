@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { btnOutline } from "../styles/classNames";
 
 function ProductCard({ product }) {
-  const { _id, name, price, images } = product;
+  const { _id, name, price, images, category, stock } = product;
   const { addToCart } = useCart();
 
   const handleAddToCart = (e) => {
@@ -12,20 +11,44 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4">
-      <Link to={`/productos/${_id}`} className="flex flex-col gap-2 text-inherit no-underline">
-        <img
-          src={images?.[0]}
-          alt={name}
-          className="h-44 w-full rounded-lg bg-gray-100 object-cover"
-        />
-        <h3 className="font-semibold text-gray-900">{name}</h3>
-        <p className="font-semibold text-brand-600">${price}</p>
-      </Link>
-      <button type="button" onClick={handleAddToCart} className={btnOutline}>
+    <Link
+      to={`/productos/${_id}`}
+      className="group flex flex-col gap-3 rounded-xl border border-ink-800 bg-ink-900/80 p-4 backdrop-blur transition-colors hover:border-cognac-500/40"
+    >
+      <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-ink-800">
+        {images?.[0] ? (
+          <img
+            src={images[0]}
+            alt={name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <span className="flex h-full items-center justify-center text-xs uppercase tracking-widest text-cream-200/30">
+            Sin imagen
+          </span>
+        )}
+        {stock === 0 && (
+          <span className="absolute left-3 top-3 rounded-full bg-ink-950/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-cream-200/80">
+            Agotado
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-1">
+        {category && <span className="eyebrow text-[10px]">{category}</span>}
+        <h3 className="font-display text-lg font-semibold text-cream-50">{name}</h3>
+        <p className="text-sm text-cognac-400">${price}</p>
+      </div>
+
+      <button
+        type="button"
+        onClick={handleAddToCart}
+        disabled={stock === 0}
+        className="rounded-full border border-cream-100/25 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-cream-50 transition-colors hover:bg-cream-50/10 disabled:cursor-not-allowed disabled:opacity-40"
+      >
         Agregar al carrito
       </button>
-    </div>
+    </Link>
   );
 }
 

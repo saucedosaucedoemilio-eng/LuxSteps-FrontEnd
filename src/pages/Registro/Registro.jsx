@@ -19,10 +19,12 @@ function Registro() {
   };
 
   return (
-    <section className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold text-gray-900">Crear cuenta</h1>
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <RegisterForm onSubmit={handleRegister} />
+    <section className="mx-auto w-full max-w-md px-6 py-20">
+      <div className="flex flex-col gap-5 rounded-2xl border border-ink-800 bg-ink-950/80 p-8 backdrop-blur">
+        <h1 className="font-display text-3xl font-semibold text-cream-50">Crear cuenta</h1>
+        {error && <p className="text-sm text-red-400">{error}</p>}
+        <RegisterForm onSubmit={handleRegister} />
+      </div>
     </section>
   );
 }

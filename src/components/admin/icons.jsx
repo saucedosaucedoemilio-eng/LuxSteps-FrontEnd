@@ -73,6 +73,15 @@ export function InfoIcon(props) {
   );
 }
 
+export function ReceiptIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z" strokeLinejoin="round" />
+      <path d="M9 8h6M9 12h6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function SaveIcon(props) {
   return (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
